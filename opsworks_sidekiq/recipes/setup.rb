@@ -53,6 +53,7 @@ node[:deploy].each do |application, deploy|
       yaml = yaml.gsub(/^(\s*)([^:][^\s]*):/,'\1:\2:')
 
       (options[:process_count] || 1).times do |n|
+        Chef::Log.debug("Running create #{config_directory}/sidekiq_#{worker}#{n+1}.yml")
         file "#{config_directory}/sidekiq_#{worker}#{n+1}.yml" do
           mode 0644
           action :create
