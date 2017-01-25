@@ -63,7 +63,7 @@ node[:deploy].each do |application, deploy|
       end
     end
 
-    Chef::Log.debug("Check variable #{deploy[:environment_variables]}")
+    Chef::Log.debug("Check variable #{deploy[:environment_variables]} / ${deploy[:user]}")
     template "#{node[:monit][:conf_dir]}/sidekiq_#{application}.monitrc" do
       mode 0644
       source "sidekiq_monitrc.erb"
