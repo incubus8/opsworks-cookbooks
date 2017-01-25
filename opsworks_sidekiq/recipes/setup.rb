@@ -68,7 +68,7 @@ node[:deploy].each do |application, deploy|
       source "sidekiq_monitrc.erb"
       variables({
         :deploy => deploy,
-        :redis_url => deploy[application][:environment][:REDIS_URL],
+        :redis_url => deploy[application][:REDIS_URL],
         :application => application,
         :workers => workers,
         :syslog => node[:sidekiq][application][:syslog]
