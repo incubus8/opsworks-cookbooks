@@ -71,6 +71,7 @@ node[:deploy].each do |application, deploy|
       variables({
         :deploy => deploy,
         :redis_url => deploy[:environment_variables][:REDIS_URL],
+        :admin_username => deploy[:environment_variables][:ADMIN_USERNAME],
         :application => application,
         :workers => workers,
         :syslog => node[:sidekiq][application][:syslog]
