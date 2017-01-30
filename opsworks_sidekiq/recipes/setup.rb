@@ -48,10 +48,12 @@ node[:deploy].each do |application, deploy|
 
       # Generate YAML string
       yaml = YAML::dump(config)
+      Chef::Log.debug("Generating before yaml: #{yaml}")
 
       # Convert YAML string keys to symbol keys for sidekiq while preserving
       # indentation. (queues: to :queues:)
       yaml = yaml.gsub(/^(\s*)([^:][^\s]*):/,'\1:\2:')
+      Chef::Log.debug("Generating after yaml: #{yaml}")
 
       (options[:process_count] || 1).times do |n|
         Chef::Log.debug("Running create #{config_directory}/sidekiq_#{worker}#{n+1}.yml")
